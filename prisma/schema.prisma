@@ -8,9 +8,9 @@ datasource db {
 }
 
 model User {
-  id       String  @id @default(uuid())
+  id       String    @id @default(uuid())
   name     String
-  email    String  @unique
+  email    String    @unique
   password String
   posts    Post[]
   comments Comment[]
@@ -19,31 +19,31 @@ model User {
 }
 
 model Post {
-  id        String  @id @default(uuid())
+  id        String   @id @default(uuid())
   title     String
   content   String
   authorId  String
-  author    User    @relation(fields: [authorId], references: [id])
+  author    User     @relation(fields: [authorId], references: [id])
   createdAt DateTime @default(now())
 }
 
 model NFT {
-  id        String  @id @default(uuid())
+  id        String    @id @default(uuid())
   name      String
   imageUrl  String
   price     Float
   ownerId   String
-  owner     User    @relation(fields: [ownerId], references: [id])
+  owner     User      @relation(fields: [ownerId], references: [id])
   comments  Comment[]
-  createdAt DateTime @default(now())
+  createdAt DateTime  @default(now())
 }
 
 model Comment {
-  id       String  @id @default(uuid())
-  content  String
-  userId   String
-  user     User    @relation(fields: [userId], references: [id])
-  nftId    String
-  nft      NFT     @relation(fields: [nftId], references: [id])
+  id        String   @id @default(uuid())
+  content   String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  nftId     String
+  nft       NFT      @relation(fields: [nftId], references: [id])
   createdAt DateTime @default(now())
 }

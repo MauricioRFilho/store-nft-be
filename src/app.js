@@ -1,16 +1,17 @@
 import express from "express";
 import cors from "cors";
-import { PrismaClient } from "@prisma/client";
+import userRoutes from "./routes/user.routes.js";
+import postRoutes from "./routes/post.routes.js";
+import nftRoutes from "./routes/nft.routes.js";
+import commentRoutes from "./routes/comment.routes.js";
 
 const app = express();
-const prisma = new PrismaClient();
-
 app.use(cors());
 app.use(express.json());
 
-app.get("/nfts", async (req, res) => {
-  const nfts = await prisma.nFT.findMany();
-  res.json(nfts);
-});
+app.use("/users", userRoutes);
+app.use("/posts", postRoutes);
+app.use("/nfts", nftRoutes);
+app.use("/comments", commentRoutes);
 
-app.listen(3000, () => console.log("Server running on port 3000"));
+app.listen(3000, () => console.log("Servidor rodando na porta 3000"));
